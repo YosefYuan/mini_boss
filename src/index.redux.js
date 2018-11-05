@@ -20,3 +20,11 @@ export function addGun(){
 export function minusGun(){
     return {type: MINUS}
 }
+
+export function addGunAsync(){
+    return dispatch => {
+        setTimeout(() => {
+            dispatch(addGun())
+        },2000)
+    }
+}
