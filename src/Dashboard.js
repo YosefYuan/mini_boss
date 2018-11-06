@@ -3,7 +3,6 @@ import { Link, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import App from './App'
 import { logout } from './Auth.redux'
-import { Button } from 'antd-mobile';
 
 function Erying() {
     return <h2>Erying</h2>
@@ -16,11 +15,8 @@ function Qibinglian() {
     { logout }
 )
 class Dashboard extends Component {
-    // constructor(props) {
-    //     super(props)
-    // }
     render() {
-        console.log(this.props)
+        const matchUrl = this.props.match.url
         const redirectToLogin = <Redirect to='/login'></Redirect>
         const app = (
             <div>
@@ -28,18 +24,18 @@ class Dashboard extends Component {
                 {this.props.isAuth ? <button onClick={this.props.logout}>注销</button> : null}
                 <ul>
                     <li>
-                        <Link to="/dashboard/">yiying</Link>
+                        <Link to={`${matchUrl}`}>yiying</Link>
                     </li>
                     <li>
-                        <Link to="/dashboard/erying">erying</Link>
+                        <Link to={`${matchUrl}/erying`}>erying</Link>
                     </li>
                     <li>
-                        <Link to="/dashboard/qibinglian">qibinglian</Link>
+                        <Link to={`${matchUrl}/qibinglian`}>qibinglian</Link>
                     </li>
                 </ul>
-                <Route path='/dashboard/' exact component={App}></Route>
-                <Route path='/dashboard/erying' component={Erying}></Route>
-                <Route path='/dashboard/qibinglian' component={Qibinglian}></Route>
+                <Route path={`${matchUrl}`} exact component={App}></Route>
+                <Route path={`${matchUrl}/erying`} component={Erying}></Route>
+                <Route path={`${matchUrl}/qibinglian`} component={Qibinglian}></Route>
             </div>
         )
         return (this.props.isAuth ? app : redirectToLogin)
