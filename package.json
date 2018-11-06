@@ -123,7 +123,16 @@
           "libraryName": "antd-mobile",
           "style": "css"
         }
+      ],
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        }
       ]
     ]
+  },
+  "devDependencies": {
+    "react-redux": "^5.1.0"
   }
 }
