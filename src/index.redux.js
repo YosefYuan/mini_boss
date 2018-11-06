@@ -2,7 +2,7 @@ const ADD = 'ADD'
 const MINUS = 'MINUS'
 
 // reducer
-export function counter(state = 0, action) {
+export function counter(state = 10, action) {
     switch (action.type) {
         case 'ADD':
             return state + 1;
