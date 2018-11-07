@@ -12,6 +12,8 @@ import thunk from 'redux-thunk'
 import reducers from './reducer'
 import Auth from './Auth'
 import Dashboard from './Dashboard'
+import Login from './container/login/login'
+import Register from './container/register/register'
 
 const store = createStore(
     reducers,
@@ -24,11 +26,12 @@ const store = createStore(
 ReactDom.render(
     <Provider store={store}>
         <BrowserRouter>
-            <Switch>
-                <Route path='/login' component={Auth}></Route>
-                <Route path='/dashboard' component={Dashboard}></Route>
-                <Redirect to='/dashboard'></Redirect>
-            </Switch>
+            <div>
+                <Switch>
+                    <Route path='/login' component={Login}></Route>
+                    <Route path='/register' component={Register}></Route>
+                </Switch>
+            </div>
         </BrowserRouter>
     </Provider>,
     document.getElementById('root')
