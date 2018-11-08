@@ -14,6 +14,7 @@ import Auth from './Auth'
 import Dashboard from './Dashboard'
 import Login from './container/login/login'
 import Register from './container/register/register'
+import AuthRoute from './component/authRoute/authRoute'
 
 const store = createStore(
     reducers,
@@ -27,10 +28,9 @@ ReactDom.render(
     <Provider store={store}>
         <BrowserRouter>
             <div>
-                <Switch>
-                    <Route path='/login' component={Login}></Route>
-                    <Route path='/register' component={Register}></Route>
-                </Switch>
+                <AuthRoute></AuthRoute>
+                <Route path='/login' component={Login}></Route>
+                <Route path='/register' component={Register}></Route>
             </div>
         </BrowserRouter>
     </Provider>,
