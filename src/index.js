@@ -24,11 +24,17 @@ const store = createStore(
     )
 )
 
+function Boss() {
+    return <h2>Boss页面</h2>
+}
+
 ReactDom.render(
     <Provider store={store}>
         <BrowserRouter>
             <div>
                 <AuthRoute></AuthRoute>
+
+                <Route path='/boss' component={Boss}></Route>
                 <Route path='/login' component={Login}></Route>
                 <Route path='/register' component={Register}></Route>
             </div>
