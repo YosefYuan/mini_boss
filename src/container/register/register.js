@@ -6,12 +6,20 @@ class Register extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            user: '',
+            pwd: '',
+            repeatpwd: '',
             type: 'genius'
         }
         this.register = this.register.bind(this)
     }
     register() {
-        console.log('register')
+        console.log(this.state)
+    }
+    handleChange(key, val) {
+        this.setState({
+            [key]:val
+        })
     }
     render() {
         const RadioItem = Radio.RadioItem
@@ -20,15 +28,27 @@ class Register extends Component {
                 <Logo></Logo>
                 <h2>注册页</h2>
                 <List>
-                    <InputItem>用户</InputItem>
+                    <InputItem
+                        onClick={v => { this.handleChange('user', v) }}
+                    >用户</InputItem>
                     <WhiteSpace />
-                    <InputItem>密码</InputItem>
+                    <InputItem
+                        onClick={v => { this.handleChange('pwd', v) }}
+                        type='password'
+                    >密码</InputItem>
                     <WhiteSpace />
-                    <InputItem>确认密码</InputItem>
+                    <InputItem
+                        onClick={v => { this.handleChange('repeatpwd', v) }}
+                        type='password'
+                    >确认密码</InputItem>
                 </List>
                 <WhiteSpace />
-                <RadioItem checked={this.state.type === 'genius'}>牛人</RadioItem>
-                <RadioItem checked={this.state.type === 'BOSS'}>BOSS</RadioItem>
+                <RadioItem
+                    onClick={() => { this.handleChange('type', 'genius') }}
+                    checked={this.state.type === 'genius'}>牛人</RadioItem>
+                <RadioItem
+                    onClick={() => { this.handleChange('type', 'boss') }}
+                    checked={this.state.type === 'boss'}>BOSS</RadioItem>
                 <WhiteSpace />
                 <Button onClick={this.register} type='primary'>注册</Button>
             </div>

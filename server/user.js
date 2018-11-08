@@ -4,7 +4,7 @@ const Router = express.Router()
 Router.get('/info', function (req, res) {
     // check cookie
     return res.json({
-        code: 0
+        code: 1
     })
 })
 

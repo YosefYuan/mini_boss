@@ -12,7 +12,7 @@ class AuthRoute extends Component {
         }
         axios.get('/user/info')
             .then(res => {
-                console.log({res})
+                console.log({ res })
                 if (res.status == 200) {
                     if (res.data.code == 0) {
                         // TODO successful after login
@@ -23,7 +23,7 @@ class AuthRoute extends Component {
             })
     }
     render() {
-        return <p>666</p>
+        return null
     }
 }
 export default AuthRoute
