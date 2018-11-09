@@ -15,7 +15,6 @@ class Login extends Component {
         return (
             <div>
                 <Logo></Logo>
-                <h2>登录页</h2>
                 <List>
                     <InputItem>用户</InputItem>
                     <InputItem>密码</InputItem>

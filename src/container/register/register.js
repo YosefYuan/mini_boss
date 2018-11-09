@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import Logo from '../../component/logo/logo'
 import { List, InputItem, WingBlank, WhiteSpace, Button, Radio } from 'antd-mobile'
+import { connect } from 'react-redux'
+import { register } from '../../redux/user.redux'
 
+@connect(
+    state => state.user,
+    { register }
+)
 class Register extends Component {
     constructor(props) {
         super(props)
@@ -12,13 +18,15 @@ class Register extends Component {
             type: 'genius'
         }
         this.register = this.register.bind(this)
+        this.handleChange = this.handleChange.bind(this)
     }
     register() {
-        console.log(this.state)
+        // console.log(this.state)
+        this.props.register(this.state)
     }
     handleChange(key, val) {
         this.setState({
-            [key]:val
+            [key]: val
         })
     }
     render() {
@@ -26,19 +34,19 @@ class Register extends Component {
         return (
             <div>
                 <Logo></Logo>
-                <h2>注册页</h2>
+                {this.props.msg ? <p className="error-msg">{this.props.msg}</p> : null}
                 <List>
                     <InputItem
-                        onClick={v => { this.handleChange('user', v) }}
+                        onChange={v => { this.handleChange('user', v) }}
                     >用户</InputItem>
                     <WhiteSpace />
                     <InputItem
-                        onClick={v => { this.handleChange('pwd', v) }}
+                        onChange={v => { this.handleChange('pwd', v) }}
                         type='password'
                     >密码</InputItem>
                     <WhiteSpace />
                     <InputItem
-                        onClick={v => { this.handleChange('repeatpwd', v) }}
+                        onChange={v => { this.handleChange('repeatpwd', v) }}
                         type='password'
                     >确认密码</InputItem>
                 </List>
