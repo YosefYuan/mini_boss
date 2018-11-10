@@ -3,10 +3,29 @@ const Router = express.Router()
 const model = require('./model')
 const User = model.getModule('user')
 const utility = require('utility')
+const _filter = { 'pwd': 0, '__v': 0 }
 
 Router.get('/list', function (req, res) {
+    // User.remove({},()=>{})
     User.find({}, function (err, doc) {
         return res.json(doc)
+    })
+})
+Router.post('/login', function (req, res) {
+    const { user, pwd } = req.body
+    console.log('in now')
+    User.findOne({ user, pwd: _pwdMd5(pwd) }, _filter, function (err, doc) {
+        if (err) {
+            return
+            // TODO ERR
+        }
+        if (!doc) {
+            return res.json({ code: 1, msg: '用户名不存在或密码错误' })
+        }
+        if (doc) {
+            res.cookie('userid', doc._id)
+            return res.json({ code: 0, data: doc })
+        }
     })
 })
 Router.post('/register', function (req, res) {
@@ -20,19 +39,40 @@ Router.post('/register', function (req, res) {
         if (doc) {
             return res.json({ code: 1, msg: '用户名重复' })
         }
-        User.create({ user, pwd: _pwdMd5(pwd), type }, function (e, d) {
+        const userModel = new User({ user, type, pwd: _pwdMd5(pwd) })
+        userModel.save(function (e, d) {
             if (e) {
-                return res.json({ code: 1, msg: 'server error' })
+                return res.json({ code: 1, msg: 'Server error' })
             }
-            return res.json({ code: 0 })
+            const { user, type, _id } = d
+            res.cookie('userid', _id)
+            res.json({ code: 0, data: { user, type, _id } })
         })
+        // User.create({ user, pwd: _pwdMd5(pwd), type }, function (e, d) {
+        //     if (e) {
+        //         return res.json({ code: 1, msg: 'Server error' })
+        //     }
+        //     return res.json({ code: 0 })
+        // })
     })
 })
 Router.get('/info', function (req, res) {
     // check cookie
-    return res.json({
-        code: 1
-    })
+    const { userid } = req.cookies
+    if (!userid) {
+        return res.json({
+            code: 1
+        })
+    } else {
+        User.findOne({ _id: userid }, _filter, function (err, doc) {
+            if (err) {
+                return res.json({ code: 1, msg: 'Server error' })
+            }
+            if (doc) {
+                return res.json({ code: 0, data: doc })
+            }
+        })
+    }
 })
 
 function _pwdMd5(pwd) {
