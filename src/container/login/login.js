@@ -20,7 +20,7 @@ class Login extends Component {
         this.register = this.register.bind(this)
     }
     login() {
-        console.log(this.state)
+        // console.log(this.state)
         this.props.login(this.state)
     }
     register() {
@@ -44,6 +44,7 @@ class Login extends Component {
                     >用户</InputItem>
                     <InputItem
                         onChange={v => { this.handleChange('pwd', v) }}
+                        type="password"
                     >密码</InputItem>
                 </List>
                 <WhiteSpace />

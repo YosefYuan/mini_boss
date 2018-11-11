@@ -22,7 +22,6 @@ class Register extends Component {
         this.handleChange = this.handleChange.bind(this)
     }
     register() {
-        // console.log(this.state)
         this.props.register(this.state)
     }
     handleChange(key, val) {

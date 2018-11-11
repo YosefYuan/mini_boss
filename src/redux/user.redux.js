@@ -12,6 +12,7 @@ const initState = {
     msg: '',
     type: ''
 }
+
 export function user(state = initState, action) {
     switch (action.type) {
         case REGISTER_SUCCESS:
