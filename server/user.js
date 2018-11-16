@@ -11,6 +11,27 @@ Router.get('/list', function (req, res) {
         return res.json(doc)
     })
 })
+Router.post('/update', function (req, res) {
+    const { userid } = req.cookies
+    if (!userid) {
+        return res.dumps({ code: 1 })
+    }
+    const { body } = req
+    User.findByIdAndUpdate(userid, body, function (err, doc) {
+        if (err) {
+            return
+            // TODO ERR
+        }
+        const data = Object.assign({}, {
+            user: doc.user,
+            type: doc.type
+        }, body)
+        return res.json({
+            code: 0,
+            data
+        })
+    })
+})
 Router.post('/login', function (req, res) {
     const { user, pwd } = req.body
     console.log('in now')
@@ -57,7 +78,7 @@ Router.post('/register', function (req, res) {
     })
 })
 Router.get('/info', function (req, res) {
-    // check cookie
+    // check cookies
     const { userid } = req.cookies
     if (!userid) {
         return res.json({
