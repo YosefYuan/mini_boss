@@ -1,14 +1,13 @@
 import {
-    combineReducers
-} from 'redux'
+	combineReducers
+} from "redux"
 import {
-    user
-} from './redux/user.redux'
+	user
+} from "./redux/user.redux"
 import {
-    chatuser
-} from './redux/chatuser.redux'
-
+	chatuser
+} from "./redux/chatuser.redux"
 export default combineReducers({
-    user,
-    chatuser
+	user,
+	chatuser
 })
