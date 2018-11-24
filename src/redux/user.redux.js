@@ -73,6 +73,8 @@ export function update(data) {
 	return dispatch => {
 		axios.post("/user/update", data).then(res => {
 			if (res.status == 200 && res.data.code == 0) {
+				
+				console.log('check title',res.data.data) // eslint-disable-line
 				dispatch(_authSuccess(res.data.data))
 			} else {
 				dispatch(_errorMsg(res.data.msg))
