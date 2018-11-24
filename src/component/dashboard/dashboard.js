@@ -5,17 +5,10 @@ import { NavBar } from "antd-mobile"
 import NavLinkBar from "../navLinkBar/navLinkBar"
 import Boss from "../boss/boss"
 import Genius from "../genius/genius"
-
-// function Genius() {
-// 	return <h2>Genius</h2>
-// }
+import User from "../user/user"
 
 function Msg() {
 	return <h2>Msg</h2>
-}
-
-function User() {
-	return <h2>User</h2>
 }
 
 @connect(state => state)
