@@ -4,6 +4,14 @@ import { Result, List, WhiteSpace } from "antd-mobile"
 
 @connect(state => state.user)
 class User extends Component {
+	constructor(props) {
+		super(props)
+		this.logout = this.logout.bind(this)
+	}
+	logout() {
+		console.log("logout") //eslint-disable-line
+		// => TO GO ON
+	}
 	render() {
 		const props = this.props
 		const Item = List.Item
@@ -37,7 +45,7 @@ class User extends Component {
 				</List>
 				<WhiteSpace />
 				<List>
-					<Item>退出登录</Item>
+					<Item onClick={this.logout}>退出登录</Item>
 				</List>
 			</div>
 		) : null
