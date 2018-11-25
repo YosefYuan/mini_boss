@@ -5,6 +5,7 @@
 .am-tab-bar{
     bottom: 0;
     position: fixed;
+    z-index: -1;
     width: 100%;
 }
 .fixed-header.am-navbar{
