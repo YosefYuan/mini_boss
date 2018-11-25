@@ -4,31 +4,24 @@ import { login } from "../../redux/user.redux"
 import Logo from "../../component/logo/logo"
 import { List, InputItem, WingBlank, WhiteSpace, Button } from "antd-mobile"
 import { Redirect } from "react-router-dom"
+import ImoocForm from "../../component/imooc-Form/imooc-Form"
 
 @connect(
 	state => state.user,
 	{ login }
 )
+@ImoocForm
 class Login extends Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-			user: "",
-			pwd: ""
-		}
 		this.login = this.login.bind(this)
 		this.register = this.register.bind(this)
 	}
 	login() {
-		this.props.login(this.state)
+		this.props.login(this.props.state)
 	}
 	register() {
 		this.props.history.push("./register")
-	}
-	handleChange(key, val) {
-		this.setState({
-			[key]: val
-		})
 	}
 	render() {
 		return (
@@ -41,14 +34,14 @@ class Login extends Component {
 				<List>
 					<InputItem
 						onChange={v => {
-							this.handleChange("user", v)
+							this.props.handleChange("user", v)
 						}}
 					>
 						用户
 					</InputItem>
 					<InputItem
 						onChange={v => {
-							this.handleChange("pwd", v)
+							this.props.handleChange("pwd", v)
 						}}
 						type="password"
 					>
